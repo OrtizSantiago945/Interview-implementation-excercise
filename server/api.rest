@@ -1,0 +1,51 @@
+// FOLDERS
+
+###
+GET http://localhost:3000/api/folders
+
+###
+POST http://localhost:3000/api/folders
+content-type: application/json
+
+{
+    "name": "Daily tasks",
+    "status": "Active"
+}
+
+###
+PUT http://localhost:3000/api/folders/11
+content-type: application/json
+
+{
+    "name": "Homework"
+}
+
+###
+DELETE http://localhost:3000/api/folders/11
+
+
+// TASKS 
+
+###
+GET http://localhost:3000/api/tasks
+
+###
+POST http://localhost:3000/api/tasks
+content-type: application/json
+
+{
+    "folder_id": 1,
+    "description": "Turn off the light",
+    "status": "Active"
+}
+
+###
+PUT http://localhost:3000/api/tasks/1
+content-type: application/json
+
+{
+    "description": "Buy chips"
+}
+
+###
+DELETE http://localhost:3000/api/tasks/2
