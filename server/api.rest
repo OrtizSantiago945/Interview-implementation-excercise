@@ -8,7 +8,7 @@ POST http://localhost:3000/api/folders
 content-type: application/json
 
 {
-    "name": "Daily tasks",
+    "name": "Training routine",
     "status": "Active"
 }
 
@@ -27,7 +27,7 @@ DELETE http://localhost:3000/api/folders/11
 // TASKS 
 
 ###
-GET http://localhost:3000/api/tasks
+GET http://localhost:3000/api/tasks/1
 
 ###
 POST http://localhost:3000/api/tasks
@@ -36,15 +36,15 @@ content-type: application/json
 {
     "folder_id": 1,
     "description": "Turn off the light",
-    "status": "Active"
+    "completed": false
 }
 
 ###
-PUT http://localhost:3000/api/tasks/1
+PUT http://localhost:3000/api/tasks/3
 content-type: application/json
 
 {
-    "description": "Buy chips"
+    "completed": false
 }
 
 ###

@@ -1,30 +1,28 @@
 <form action="" class="position-absolute top-50 start-50 translate-middle w-75">
   <li class="list-group-item d-flex justify-content-between align-items-start bg-secondary">
     <div class="ms-2 me-auto">
-      <div class="fw-bold">Folders</div>
+      <div class="fw-bold">FOLDERS</div>
     </div>
   </li>
   <ol class="list-group list-group-numbered">
-    <li class="list-group-item d-flex justify-content-evenly align-items-start">
+    <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let folder of allFolders">
       <div class="ms-2 me-auto">
-        <div class="fw-bold">Work</div>
+        <div class="fw-bold">{{folder.name}}</div>
       </div>
-      <span class="nav-link">View items</span>
-      <span class="nav-link">Remove</span>
+      <div class="ms-2">
+        <span class="nav-link" (click)="viewItems(folder)">View items</span>
+      </div>
+      <div class="ms-2">
+        <span class="nav-link" (click)="removeFolder(folder)">Remove</span>
+      </div>
     </li>
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-      <div class="ms-2 me-auto">
-        <div class="fw-bold">Daily tasks</div>
-      </div>
-      <span class="nav-link">View items</span>
-      <span class="nav-link">Remove</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-      <div class="ms-2 me-auto">
-        <div class="fw-bold">Training routine</div>
-      </div>
-      <span class="nav-link nav-dark">View items</span>
-      <span class="nav-link">Remove</span>
+    <li class="list-group-item d-flex justify-content-between align-items-start" *ngIf="allFolders == undefined || allFolders.length == 0">
+      <div class="fw-bold">There are no folders to show</div>
     </li>
   </ol>
+  <br>
+  <li class="list-group-item d-flex align-items-center">
+    <input class="form-control" type="text" placeholder="Input a new folder" [(ngModel)]="newFolder.name" name="nameInput">
+    <button class="btn btn-primary" style="margin-left: 5px" (click)="addFolder()">Add</button>
+  </li>
 </form>

@@ -1,1 +1,51 @@
-<p>tasks-form works!</p>
+<form action="" class="position-absolute top-50 start-50 translate-middle w-75">
+  <li class="list-group-item d-flex justify-content-between align-items-start bg-secondary">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">{{open_folder.name}} > Tasks</div>
+    </div>
+    <div class="ms-2">
+      <span class="fw-bold" (click)="goBack()">Go back</span>
+    </div>
+  </li>
+  <ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let task of tasks">
+      <input class="form-check-input me-1" type="checkbox" [checked]="task.completed" (change)="completeTask(task)">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold" [ngStyle]="{'color': task.completed ? 'green' : 'black'}">{{task.description}}</div>
+      </div>
+      <div class="ms-2">
+        <span class="nav-link">Edit</span>
+      </div>
+      <div class="ms-2">
+        <span class="nav-link" (click)="removeTask(task)">Remove</span>
+      </div>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start" *ngIf="tasks == undefined || tasks.length == 0">
+      <div class="fw-bold">There are no tasks to show</div>
+    </li>
+  </ul>
+  <br>
+  <li class="list-group-item d-flex align-items-center">
+    <input class="form-control" type="text" placeholder="Input a new task" [(ngModel)]="newTask.description" name="descInput">
+    <button class="btn btn-primary" style="margin-left: 5px" (click)="addTask()">Add</button>
+  </li>
+</form>
+
+
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editModal">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+        </div>

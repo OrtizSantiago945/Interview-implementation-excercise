@@ -1,4 +1,6 @@
 <app-nav-header></app-nav-header>
+
 <div class="container">
-  <app-folders-form></app-folders-form>
+  <app-folders-form *ngIf="activeFolder == null" (openFolderEvent)="activeFolder = $event"></app-folders-form>
+  <app-tasks-form *ngIf="activeFolder != null" [folder]="activeFolder" (closeFolderEvent)="activeFolder = $event"></app-tasks-form>
 </div>

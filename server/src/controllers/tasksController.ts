@@ -5,7 +5,8 @@ import db from "../database";
 class TasksController {
     
     public async list(req : Request, res : Response){
-        const tasks = await db.query('SELECT * FROM tasks');
+        const { id } = req.params;
+        const tasks = await db.query('SELECT * FROM tasks WHERE folder_id=?', [id]);
         res.json(tasks);
     }
 

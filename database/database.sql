@@ -20,6 +20,8 @@ CREATE TABLE tasks(
     CONSTRAINT folder_id
     FOREIGN KEY (folder_id)
     REFERENCES excercise_db.folders (id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
 );
 
 DESCRIBE tasks;

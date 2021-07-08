@@ -9,6 +9,9 @@ import { TasksFormComponent } from './components/tasks-form/tasks-form.component
 import { NavHeaderComponent } from './components/nav-header/nav-header.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +23,9 @@ import { LoginFormComponent } from './components/login-form/login-form.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

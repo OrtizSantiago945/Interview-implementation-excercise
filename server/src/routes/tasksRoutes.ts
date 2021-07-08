@@ -10,7 +10,7 @@ class TasksRoutes {
     }
 
     config() : void {
-        this.router.get('/', tasksController.list);
+        this.router.get('/:id', tasksController.list);
         this.router.post('/', tasksController.create);
         this.router.put('/:id', tasksController.update);
         this.router.delete('/:id', tasksController.delete);
