@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -w",
-    "dev": "nodemon build/index.js"
+    "dev": "nodemon build/index.js",
+    "start": "node ."
   },
   "keywords": [],
-  "author": "",
+  "author": "Santiago Ortiz",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
