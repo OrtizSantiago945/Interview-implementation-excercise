@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Folder } from 'src/app/models/folder';
 import { Task } from 'src/app/models/task';
 import { TasksService } from 'src/app/services/tasks.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tasks-form',
@@ -20,16 +21,12 @@ export class TasksFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFolderTasks();
-    console.log(this.open_folder);
   }
 
 
   getFolderTasks(){
     this.taskService.getByFolder(this.open_folder.id).subscribe( res =>{
-
       this.tasks = res as Task[];
-      console.log("All tasks: ", this.tasks);
-
     },
     err => console.error(err));
   }
@@ -38,6 +35,17 @@ export class TasksFormComponent implements OnInit {
     this.taskService.updateStatus(task.id, !task.completed).subscribe( res =>{
       console.log(res);
       this.getFolderTasks();
+
+      if (task.completed == false) {
+        Swal.fire({
+          text: 'Completed!',
+          icon: 'success',
+          showConfirmButton: false,
+          toast: true,
+          position: 'bottom',
+          timer: 1500
+        })
+      }
 
     }, err => console.error(err));
   }
@@ -48,19 +56,88 @@ export class TasksFormComponent implements OnInit {
 
       this.taskService.add(this.newTask).subscribe( res =>{
         console.log(res);
+        this.newTask.description = '';
         this.getFolderTasks();
+        Swal.fire({
+          text: 'Task created!',
+          icon: 'success',
+          showConfirmButton: false,
+          toast: true,
+          position: 'bottom',
+          timer: 1500
+        })
 
       }, err => console.error(err));
 
     }else{
-      console.log("Write something!");
+      Swal.fire({
+        text: 'Write something!',
+        icon: 'error',
+        showConfirmButton: false,
+        toast: true,
+        position: 'bottom',
+        timer: 1500
+      })
     }
+  }
+
+  editTask(task : Task){
+    Swal.fire({
+      title: 'Editing "'+task.description+'"',
+      input: 'text',
+      inputPlaceholder: 'Type something here',
+      showCancelButton: true,
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Ok',
+      confirmButtonColor: '#2c3e50',
+      preConfirm: (text) => {
+         try {
+            if(!text || text == ''){
+              throw new Error();
+            }
+            task.description = text;
+            console.log(task);
+            return text;
+        } catch (error) {
+          Swal.showValidationMessage(
+            `Type something!`
+          )
+        }
+      },
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        this.taskService.updateField(task.id, task.description).subscribe( res =>{
+
+          console.log(res);
+          this.getFolderTasks();
+          Swal.fire({
+            text: 'Task updated!',
+            icon: 'success',
+            showConfirmButton: false,
+            toast: true,
+            position: 'bottom',
+            timer: 1500
+          })
+
+        }, err => console.error(err));
+
+      }
+    })
   }
 
   removeTask(task : Task){
     this.taskService.delete(task.id).subscribe( res =>{
       console.log(res);
       this.getFolderTasks();
+      Swal.fire({
+        text: 'Task removed!',
+        icon: 'success',
+        showConfirmButton: false,
+        toast: true,
+        position: 'bottom',
+        timer: 1500
+      })
 
     }, err => console.error(err));
   }

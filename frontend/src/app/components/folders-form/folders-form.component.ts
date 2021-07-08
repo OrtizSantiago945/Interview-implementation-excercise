@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Folder } from 'src/app/models/folder';
 import { FoldersService } from 'src/app/services/folders.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-folders-form',
@@ -26,9 +27,7 @@ export class FoldersFormComponent implements OnInit {
 
   getAllFolders(){
     this.folderService.getAll().subscribe( res =>{
-
       this.allFolders = res as Folder[];
-      console.log("My folders: ", this.allFolders);
 
     },
     err => console.error(err));
@@ -39,12 +38,29 @@ export class FoldersFormComponent implements OnInit {
 
       this.folderService.add(this.newFolder).subscribe( res =>{
         console.log(res);
+        this.newFolder.name = '';
         this.getAllFolders();
+
+        Swal.fire({
+          text: 'Folder created!',
+          icon: 'success',
+          showConfirmButton: false,
+          toast: true,
+          position: 'bottom',
+          timer: 1500
+        })
 
       }, err => console.error(err));
 
     }else{
-      console.log("Write something!");
+      Swal.fire({
+        text: 'Write something!',
+        icon: 'error',
+        showConfirmButton: false,
+        toast: true,
+        position: 'bottom',
+        timer: 1500
+      })
     }
   }
 
@@ -52,7 +68,15 @@ export class FoldersFormComponent implements OnInit {
     this.folderService.delete(folder.id).subscribe( res =>{
       console.log(res);
       this.getAllFolders();
-      
+      Swal.fire({
+        text: 'Folder removed!',
+        icon: 'success',
+        showConfirmButton: false,
+        toast: true,
+        position: 'bottom',
+        timer: 1500
+      })
+
     }, err => console.error(err));
   }
 

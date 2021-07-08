@@ -23,7 +23,7 @@ class FoldersController {
     // deletes on cascade
     public async delete(req : Request, res : Response){
         const { id } = req.params;
-        await db.query('DELETE FROM folders, tasks USING folders INNER JOIN tasks WHERE folders.id=? AND folders.id = tasks.folder_id', [id]);
+        await db.query('DELETE FROM folders WHERE id=?', [id]);
         res.json({Message: 'Deleted'});
     }
 }
