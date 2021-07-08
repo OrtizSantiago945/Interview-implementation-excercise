@@ -4,10 +4,10 @@
       <div class="fw-bold">FOLDERS</div>
     </div>
   </li>
-  <ol class="list-group list-group-numbered">
+  <ul class="list-group">
     <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let folder of allFolders">
       <div class="ms-2 me-auto">
-        <div class="fw-bold">{{folder.name}}</div>
+        <span class="fw-bold">{{folder.name}}</span>
       </div>
       <div class="ms-2">
         <span class="nav-link" (click)="viewItems(folder)">View items</span>
@@ -19,7 +19,7 @@
     <li class="list-group-item d-flex justify-content-between align-items-start" *ngIf="allFolders == undefined || allFolders.length == 0">
       <div class="fw-bold">There are no folders to show</div>
     </li>
-  </ol>
+  </ul>
   <br>
   <li class="list-group-item d-flex align-items-center">
     <input class="form-control" type="text" placeholder="Input a new folder" [(ngModel)]="newFolder.name" name="nameInput">

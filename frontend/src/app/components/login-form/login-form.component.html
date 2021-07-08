@@ -7,14 +7,14 @@
       <form>
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="email">
+          <input type="email" class="form-control" id="email" placeholder="Type your email adress here" [(ngModel)]="email" name="email">
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password">
+          <input type="password" class="form-control" id="password" placeholder="Type your password here" [(ngModel)]="password" name="password">
         </div>
         <div class="d-grid gap-2">
-          <button class="btn btn-primary" type="button" routerLink="/home">Submit</button>
+          <button class="btn btn-primary" type="button" (click)="submit()">Submit</button>
         </div>
       </form>
     </div>
