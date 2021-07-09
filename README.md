@@ -87,6 +87,14 @@ Things you must pre-install to run the project:
    server/ npm run dev
    frontend/ ng serve --o
    ```
+### Usage 
+
+Use the code from database/database.sql file to create the schema.
+I recomend MySQL Workbench if you want a tool to manage your database.
+
+To login use these credentials: 
+* Email: 'user@gmail.com'
+* Password: '123456'
 
 <!-- CONTACT -->
 ## Contact
